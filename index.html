@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sfleta_calc</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="calc.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container navigator">
+        <a class="navbar-brand" href="index.html">SmartCalc v4.0</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >Calc</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="graph.html">Graph</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="history.html">History</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="help.html">Help</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br />
+
+    <div class="container compact">
+      <div class="row no-gutters">
+        <div class="col-2">
+          <input
+            id="X_value"
+            type="text"
+            class="
+              form-control
+              input_field
+              border-dark border-1
+              rounded
+              text-center
+            "
+            placeholder="X"
+            aria-label="X_value"
+          />
+        </div>
+        <div class="col-8">
+          <input
+            id="expressionField"
+            type="text"
+            class="
+              form-control
+              input_field
+              border-dark border-1
+              rounded
+              text-center
+            "
+            placeholder="Expression"
+            aria-label="Expression"
+          />
+        </div>
+
+        <div class="col-2">
+          <button
+            id="btn_delete"
+            class="
+              btn btn-lg btn_delete btn-danger
+              border-dark border-1
+              rounded
+              text-center
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="1.5em"
+              viewBox="0 0 640 512"
+              class="img-fluid"
+            >
+              <path
+                d="M576 64H205.26A63.97 63.97 0 0 0 160 82.75L9.37 233.37c-12.5 12.5-12.5 32.76 0 45.25L160 429.25c12 12 28.28 18.75 45.25 18.75H576c35.35 0 64-28.65 64-64V128c0-35.35-28.65-64-64-64zm-84.69 254.06c6.25 6.25 6.25 16.38 0 22.63l-22.62 22.62c-6.25 6.25-16.38 6.25-22.63 0L384 301.25l-62.06 62.06c-6.25 6.25-16.38 6.25-22.63 0l-22.62-22.62c-6.25-6.25-6.25-16.38 0-22.63L338.75 256l-62.06-62.06c-6.25-6.25-6.25-16.38 0-22.63l22.62-22.62c6.25-6.25 16.38-6.25 22.63 0L384 210.75l62.06-62.06c6.25-6.25 16.38-6.25 22.63 0l22.62 22.62c6.25 6.25 6.25 16.38 0 22.63L429.25 256l62.06 62.06z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div
+          class="
+            btn btn-lg
+            text-center
+            border-dark border-1
+            col-2
+            btn_etc
+            d-flex
+            align-items-center-flex align-items-center
+          "
+        >
+          <div class="box w-100">
+            <label class="btn_value">(</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            text-center
+            border-dark border-1
+            col-2
+            btn_etc
+            d-flex
+            align-items-center-flex align-items-center
+          "
+        >
+          <div class="box w-100">
+            <label class="btn_value">)</label>
+          </div>
+        </div>
+
+        <input
+          type="text"
+          class="col-8 border-dark border-1 rounded calculator-screen text-end"
+          value="0"
+          disabled
+        />
+      </div>
+
+      <div class="row no-gutters">
+        <div
+          id="btn_reset"
+          class="
+            btn btn-lg
+            border-dark border-1
+            col-2
+            btn_etc
+            d-flex
+            align-items-center-flex align-items-center
+            cursor_fix
+          "
+        >
+          <div class="box w-100 cursor_fix">
+            <label class="cursor_fix">AC</label>
+          </div>
+        </div>
+
+        <div
+          class="
+            btn btn-lg
+            border-dark border-1
+            btn
+            col-2
+            btn_operator
+            d-flex
+            align-items-center-flex align-items-center
+          "
+        >
+          <div class="box w-100">
+            <label>^</label>
+          </div>
+        </div>
+
+        <div
+          class="
+            btn btn-lg
+            border-dark border-1
+            btn
+            col-2
+            btn_operator
+            d-flex
+            align-items-center-flex align-items-center
+          "
+        >
+          <div class="box w-100">
+            <label>%</label>
+          </div>
+        </div>
+
+        <div
+          class="
+            btn btn-lg
+            border-dark border-1
+            btn
+            col-2
+            btn_operator
+            d-flex
+            align-items-center-flex align-items-center
+          "
+        >
+          <div class="box w-100">
+            <label>/</label>
+          </div>
+        </div>
+
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>x</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>sqrt</label>
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>7</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>8</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>9</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_operator
+          "
+        >
+          <div class="box w-100">
+            <label>*</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>cos</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>acos</label>
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>4</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>5</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>6</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_operator
+          "
+        >
+          <div class="box w-100">
+            <label>-</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>sin</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>asin</label>
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div
+          id="btn_1"
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>1</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>2</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>3</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_operator
+          "
+        >
+          <div class="box w-100">
+            <label>+</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>tan</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>atan</label>
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-4
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>0</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_num
+          "
+        >
+          <div class="box w-100">
+            <label>.</label>
+          </div>
+        </div>
+
+        <div
+          class="
+            ripple
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_equal
+          "
+          id="btn_equal"
+        >
+          <div class="box w-100">
+            <label>=</label>
+          </div>
+        </div>
+
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>ln</label>
+          </div>
+        </div>
+        <div
+          class="
+            btn btn-lg
+            d-flex
+            align-items-center-flex align-items-center
+            text-center
+            border-dark border-1
+            col-2
+            btn_func
+          "
+        >
+          <div class="box w-100">
+            <label>log</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="common.js"></script>
+    <script src="calc.js"></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+:root {
+  --bs-body-bg: var(--bs-gray-100);
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 400px;
+}
+
+.input_field {
+  background-color: rgb(37, 190, 200);
+}
+
+.container.compact {
+  /* width: 75%; */
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  overflow-y: hidden;
+  /* min-width: 320px !important; */
+  /* min-height: 496px !important; */
+  /* background-color: red; */
+}
+
+div[class^='col'],
+div[class*=' col'] {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  height: 4em;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+.first_row {
+  padding: 0%;
+  margin: 0%;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.no-gutters > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.btn {
+  height: 4rem;
+}
+
+.btn_text_center {
+  text-align: center;
+  vertical-align: middle;
+  justify-content: center;
+}
